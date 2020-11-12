@@ -51,6 +51,8 @@ typedef struct	s_defhf
 typedef struct	s_mini
 {
 	int			fd;
+	int			stdi;
+	int			stdo;
 	int			flag_pipe;
 	char		*line;
 	char		**env;
@@ -94,5 +96,6 @@ int		init_environment(t_mini *shell, char *str);
 int		check_export(char *line);
 void	freeing(char **str);
 void	what_a_command(t_mini *mini);
+void	do_pipe(t_mini *mini);
 
 #endif

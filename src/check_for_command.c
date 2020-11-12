@@ -86,6 +86,16 @@ void	search_args(t_mini *mini)
 		mini->d_lst = mini->d_lst->next;
 		i++;
 	}
+	if (mini->d_lst)
+	{
+		if (ft_strncmp(mini->d_lst->content, "|", 2) == 0 && mini->d_lst)
+		{
+			do_pipe(mini);
+			ft_bzero(mini->args, mini->def->size + 2);
+			mini->d_lst = mini->d_lst->next;
+			check_for_command(mini);
+		}
+	}
 }
 
 void check_for_command(t_mini *mini)

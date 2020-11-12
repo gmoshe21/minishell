@@ -17,6 +17,7 @@ SRC = ./src/main.c\
 	./src/secondary_functions.c\
 	./src/do_exec.c\
 	./src/what_a_command.c\
+	./src/do_pipe.c\
 
 	
 OBJ = $(SRC:.c=.o)
