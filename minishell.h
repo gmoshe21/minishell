@@ -74,10 +74,10 @@ t_dblcon *getnth(t_defhf *def, int index);
 t_dblcon	*ft_dblcon_new(void *content, t_defhf *def);
 void 	line_work(t_mini *mini);
 void 	check_for_command(t_mini *mini);
-void 	do_echo(t_mini *mini);
+void do_echo(char **args);
 void 	quotes(t_mini *mini);
 void	do_cd(char **args, char **env);
-void 	do_pwd(t_mini *mini);
+void do_pwd(char **args, char **env);
 
 void	check_export_end_environment_variable(t_mini *mini);
 void	delete_variable(t_mini *shell, char *line);
