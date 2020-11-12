@@ -23,6 +23,7 @@ typedef enum Token
 	TO_GREAT,
 	TO_GRGR,
 	TO_LESS,
+	TO_EXEC,
 	TO_DOTCOMMA,
 	TO_PIPE,
 	TO_CD,
@@ -50,10 +51,14 @@ typedef struct	s_defhf
 typedef struct	s_mini
 {
 	int			fd;
+	int			flag_pipe;
 	char		*line;
 	char		**env;
 	char		**exp;
+	char		**args;
 	int			quo_ch;
+	char		*command;
+	Token		token;
 	t_defhf		*def;
 	t_dblcon	*d_lst;
 	t_list		*l_ptr;
@@ -62,16 +67,17 @@ typedef struct	s_mini
 
 
 void	push_front(t_defhf *def, t_dblcon *tmp);
+void	do_exec(char **args, char **env, char *command, int flag);
 void	push_back(t_defhf *def, t_dblcon *tmp);
 void insert(t_defhf *def, int index, t_dblcon *ins);
 t_dblcon *getnth(t_defhf *def, int index);
 t_dblcon	*ft_dblcon_new(void *content, t_defhf *def);
-void line_work(t_mini *mini);
-void check_for_comand(t_mini *mini);
-void do_echo(t_mini *mini);
-void quotes(t_mini *mini);
-void	do_cd(t_mini *mini);
-void do_pwd(t_mini *mini);
+void 	line_work(t_mini *mini);
+void 	check_for_command(t_mini *mini);
+void 	do_echo(t_mini *mini);
+void 	quotes(t_mini *mini);
+void	do_cd(char **args, char **env);
+void 	do_pwd(t_mini *mini);
 
 void	check_export_end_environment_variable(t_mini *mini);
 void	delete_variable(t_mini *shell, char *line);
@@ -87,5 +93,6 @@ void	check_environment(t_mini *shell, char *str);
 int		init_environment(t_mini *shell, char *str);
 int		check_export(char *line);
 void	freeing(char **str);
+void	what_a_command(t_mini *mini);
 
 #endif

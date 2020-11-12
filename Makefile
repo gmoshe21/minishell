@@ -1,6 +1,6 @@
 SRC = ./src/main.c\
 	./src/line_work.c\
-	./src/check_for_comand.c\
+	./src/check_for_command.c\
 	./src/do_echo.c\
 	./src/quotes.c\
 	./src/do_cd.c\
@@ -15,6 +15,8 @@ SRC = ./src/main.c\
 	./src/environment_variable.c\
 	./src/export.c\
 	./src/secondary_functions.c\
+	./src/do_exec.c\
+	./src/what_a_command.c\
 
 	
 OBJ = $(SRC:.c=.o)

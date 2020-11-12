@@ -16,17 +16,17 @@ char *get_pwd(char **env)
 	return (NULL);
 }
 
-void	do_cd(t_mini *mini)
+void	do_cd(char **args, char **env)
 {
-	t_list *l_dir;
-	l_dir = mini->lst->next;
+	// t_list *l_dir;
+	// l_dir = mini->lst->next;
 	char *str;
 
-	if (l_dir)
-		chdir(l_dir->content);
+	if (args[1])
+		chdir(args[1]);
 	else
 	{
-		str = get_pwd(mini->env);
+		str = get_pwd(env);
 		chdir(str);
 	}
 }
