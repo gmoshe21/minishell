@@ -1,20 +1,20 @@
 #include "../minishell.h"
 
-void	do_pipe(t_mini *mini)
+void	do_redir(t_mini *mini)
 {
 	pid_t pid;
-    // int mas[2];
+    int mas[2];
     int status;
     int i;
-    pipe(mini->mas);
+    // pipe(mini->mas);
     pid = fork();
 	// printf("%s\n", mini->d_lst->content);
 	// printf("%s\n", mini->d_lst->prev->content);
     if (pid == 0)
     {
-        close(mini->mas[0]);
-        dup2(mini->mas[1], 1);
-        close(mini->mas[1]);
+        // close(mini->mas[0]);
+        dup2(mini->fd_re, 1);
+        // close(mini->mas[1]);
 		mini->flag_pipe = 1;
 		what_a_command(mini);
 		if (mini->token != TO_EXEC)
@@ -35,10 +35,11 @@ void	do_pipe(t_mini *mini)
 		ft_putendl_fd("error", 2);
 	else
     {
-        close(mini->mas[1]);
-        dup2(mini->mas[0], 0);
-        close(mini->mas[0]);
+        // close(mini->mas[1]);
+        // dup2(mini->mas[0], 0);
+        // close(mini->mas[0]);
         waitpid(pid, &status, WUNTRACED);
+		close(mini->fd_re);
     }
 	mini->flag_pipe = 0;
 	// printf("%s\n", mini->d_lst->content);

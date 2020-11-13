@@ -64,6 +64,24 @@
 // 		return ;
 // 	}
 // }
+
+void make_touch(t_mini *mini)
+{
+	int fd;
+
+	fd = 0;
+	while (mini->d_lst)
+	{
+		if (ft_strncmp(mini->d_lst->content, ">", 2) == 0)
+		{
+			mini->d_lst = mini->d_lst->next;
+			fd = open(mini->d_lst->content, O_CREAT | O_RDWR | O_APPEND | O_TRUNC, 0666);
+			close (fd);
+		}
+		mini->d_lst = mini->d_lst->next;
+	}
+}
+
 void make_str(t_mini *mini, int i)
 {
 	char *str;
@@ -132,6 +150,8 @@ void line_work(t_mini *mini)
 		// 	mini->d_lst = mini->d_lst->next;
 		// }
 		// free(str);
+		make_touch(mini);
+		mini->d_lst = mini->def->head;
 		return ;
 	}
 }

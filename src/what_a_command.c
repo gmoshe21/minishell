@@ -3,7 +3,7 @@
 void what_a_command(t_mini *mini)
 {
 	if (mini->token == TO_ECHO)
-		do_echo(mini->args);
+		do_echo(mini->args, mini->mas[0]);
 	if (mini->token == TO_EXEC)
 		do_exec(mini->args, mini->env, mini->command, mini->flag_pipe);
 	if (mini->token == TO_CD)

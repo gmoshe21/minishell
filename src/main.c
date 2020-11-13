@@ -21,8 +21,9 @@ int main(int argc,char **argv, char **envp)
 	int x;
 
 	x = 0;
-	mini.stdi = dup(0);
-	mini.stdo = dup(1);
+	// mini.stdi = dup(0);
+	// mini.stdo = dup(1);
+	mini.fd_re = 0;
 	mini.flag_pipe = 0;
 	while(envp[x])
 		x++;
@@ -49,7 +50,7 @@ int main(int argc,char **argv, char **envp)
 		write(1, "msh >> \n", 7);
 		lets_free(&mini);
 		dup2(1, 0);
-		dup2(0, 1);
+		// dup2(0, 1);
 	}
 	return (0);
 }

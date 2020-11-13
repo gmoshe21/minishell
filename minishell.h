@@ -51,6 +51,8 @@ typedef struct	s_defhf
 typedef struct	s_mini
 {
 	int			fd;
+	int			fd_re;
+	int			mas[2];
 	int			stdi;
 	int			stdo;
 	int			flag_pipe;
@@ -76,9 +78,10 @@ t_dblcon *getnth(t_defhf *def, int index);
 t_dblcon	*ft_dblcon_new(void *content, t_defhf *def);
 void 	line_work(t_mini *mini);
 void 	check_for_command(t_mini *mini);
-void do_echo(char **args);
+void do_echo(char **args, int fd);
 void 	quotes(t_mini *mini);
 void	do_cd(char **args, char **env);
+void	do_redir(t_mini *mini);
 void do_pwd(char **args, char **env);
 
 void	check_export_end_environment_variable(t_mini *mini);

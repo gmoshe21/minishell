@@ -74,18 +74,39 @@
 
 void	search_args(t_mini *mini)
 {
-	int i;
+	t_dblcon *ptr;
 
+	int i;
 	i = 0;
 	mini->args = ft_calloc(mini->def->size + 2, sizeof(char**));
 	while (mini->d_lst && ft_strncmp(mini->d_lst->content, "|", 2) != 0)
 	{
 		if (ft_strncmp(mini->d_lst->content, ">", 2) == 0)
 			mini->d_lst = mini->d_lst->next->next;
+		if(!mini->d_lst)
+		{
+			mini->d_lst = mini->def->tail;
+			break ;
+		}
 		mini->args[i] = ft_strdup(mini->d_lst->content);
 		mini->d_lst = mini->d_lst->next;
 		i++;
 	}
+	ptr = mini->d_lst;
+	while (mini->d_lst)
+	{
+		if (ft_strncmp(mini->d_lst->content, ">", 2) == 0)
+		{
+			mini->d_lst = mini->d_lst->next;
+			mini->fd_re = open(mini->d_lst->content, O_CREAT | O_WRONLY | O_APPEND, 0666);
+			do_redir(mini);
+			mini->d_lst = mini->d_lst->next;
+			check_for_command(mini);
+		}
+		if (mini->d_lst)
+			mini->d_lst = mini->d_lst->prev;
+	}
+	mini->d_lst = ptr;
 	if (mini->d_lst)
 	{
 		if (ft_strncmp(mini->d_lst->content, "|", 2) == 0 && mini->d_lst)
@@ -100,6 +121,8 @@ void	search_args(t_mini *mini)
 
 void check_for_command(t_mini *mini)
 {
+	if (!mini->d_lst)
+		return ;
 	int i = 0;
 	quotes(mini);
 	if (ft_strncmp(mini->d_lst->content, "echo", 5) == 0)

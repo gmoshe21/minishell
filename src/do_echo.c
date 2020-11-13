@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void do_echo(char **args)
+void do_echo(char **args, int fd)
 {
 	int nflag;
 	// pid_t pid;
