@@ -52,6 +52,7 @@ typedef struct	s_mini
 {
 	int			fd;
 	int			fd_re;
+	int			re_flag;
 	int			mas[2];
 	int			stdi;
 	int			stdo;
@@ -77,7 +78,7 @@ void insert(t_defhf *def, int index, t_dblcon *ins);
 t_dblcon *getnth(t_defhf *def, int index);
 t_dblcon	*ft_dblcon_new(void *content, t_defhf *def);
 void 	line_work(t_mini *mini);
-void 	check_for_command(t_mini *mini);
+int 	check_for_command(t_mini *mini);
 void do_echo(char **args, int fd);
 void 	quotes(t_mini *mini);
 void	do_cd(char **args, char **env);

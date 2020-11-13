@@ -21,6 +21,7 @@ int main(int argc,char **argv, char **envp)
 	int x;
 
 	x = 0;
+	mini.re_flag = 0;
 	// mini.stdi = dup(0);
 	// mini.stdo = dup(1);
 	mini.fd_re = 0;
@@ -43,14 +44,14 @@ int main(int argc,char **argv, char **envp)
 		mini.def = (t_defhf *)malloc(sizeof(t_defhf));
 		mini.def->head = mini.def->tail = NULL;
 		mini.def->size = 0; 
-		check_export_end_environment_variable(&mini);
+		// check_export_end_environment_variable(&mini);
 		line_work(&mini);
-		check_for_command(&mini);
-		what_a_command(&mini);
+		if ((check_for_command(&mini)) != 1)
+			what_a_command(&mini);
 		write(1, "msh >> \n", 7);
 		lets_free(&mini);
 		dup2(1, 0);
-		// dup2(0, 1);
+		dup2(0, 1);
 	}
 	return (0);
 }
