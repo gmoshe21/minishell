@@ -19,6 +19,7 @@ SRC = ./src/main.c\
 	./src/what_a_command.c\
 	./src/do_pipe.c\
 	./src/do_redir.c\
+	./src/search_args.c\
 
 	
 OBJ = $(SRC:.c=.o)

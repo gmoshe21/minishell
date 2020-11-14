@@ -41,5 +41,6 @@ void	do_pipe(t_mini *mini)
         waitpid(pid, &status, WUNTRACED);
     }
 	mini->flag_pipe = 0;
+	mini->re_flag = 0; 
 	// printf("%s\n", mini->d_lst->content);
 }

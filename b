@@ -1,0 +1,10 @@
+Makefile
+a
+a.out
+a.out.dSYM
+b
+c
+libft
+minishell
+minishell.h
+src

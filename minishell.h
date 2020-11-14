@@ -32,6 +32,7 @@ typedef enum Token
 	TO_UNSET,
 	TO_ENV,
 	TO_EXIT,
+	EMPTY,
 }			Token;
 
 typedef struct		s_dblcon
@@ -53,6 +54,7 @@ typedef struct	s_mini
 	int			fd;
 	int			fd_re;
 	int			re_flag;
+	int			res;
 	int			mas[2];
 	int			stdi;
 	int			stdo;
@@ -63,6 +65,7 @@ typedef struct	s_mini
 	char		**args;
 	int			quo_ch;
 	char		*command;
+	Token		red_tok;
 	Token		token;
 	t_defhf		*def;
 	t_dblcon	*d_lst;
@@ -101,5 +104,6 @@ int		check_export(char *line);
 void	freeing(char **str);
 void	what_a_command(t_mini *mini);
 void	do_pipe(t_mini *mini);
+void	search_args(t_mini *mini);
 
 #endif

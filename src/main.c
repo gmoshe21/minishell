@@ -17,6 +17,7 @@ int main(int argc,char **argv, char **envp)
 	t_mini mini;
 	int i = 0;
 	mini.fd = 0;
+	mini.res = 0;
 	mini.lst = NULL;
 	int x;
 
@@ -43,7 +44,7 @@ int main(int argc,char **argv, char **envp)
 	{
 		mini.def = (t_defhf *)malloc(sizeof(t_defhf));
 		mini.def->head = mini.def->tail = NULL;
-		mini.def->size = 0; 
+		mini.def->size = 0;
 		// check_export_end_environment_variable(&mini);
 		line_work(&mini);
 		if ((check_for_command(&mini)) != 1)

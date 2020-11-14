@@ -72,62 +72,75 @@
 // 	waitpid(pid, NULL, WUNTRACED);
 // }
 
-void	search_args(t_mini *mini)
-{
-	t_dblcon *ptr;
+// void	search_args(t_mini *mini)
+// {
+// 	t_dblcon *ptr;
 
-	int i;
-	i = 0;
-	mini->args = ft_calloc(mini->def->size + 2, sizeof(char**));
-	while (mini->d_lst && ft_strncmp(mini->d_lst->content, "|", 2) != 0)
-	{
-		if (ft_strncmp(mini->d_lst->content, ">", 2) == 0)
-			mini->d_lst = mini->d_lst->next->next;
-		if(!mini->d_lst)
-		{
-			mini->d_lst = mini->def->tail;
-			break ;
-		}
-		if (ft_strncmp(mini->d_lst->content, "|", 2) == 0)
-			break ;
-		mini->args[i] = ft_strdup(mini->d_lst->content);
-		// printf("%s\n", mini->args[i]);
-		mini->d_lst = mini->d_lst->next;
-		i++;
-	}
-	ptr = mini->d_lst;
-	if (mini->d_lst && ft_strncmp(mini->d_lst->content, "|", 2) == 0)
-		mini->re_flag = 1;
-	// printf?("%s\n", mini->d_lst->content);
-	while (mini->d_lst)
-	{
-		if (ft_strncmp(mini->d_lst->content, ">", 2) == 0)
-		{
-			mini->d_lst = mini->d_lst->next;
-			mini->fd_re = open(mini->d_lst->content, O_CREAT | O_WRONLY | O_APPEND, 0666);
-			do_redir(mini);
-			if (mini->re_flag == 0)
-				ft_bzero(mini->args, mini->def->size + 2);
-			break;
-			// mini->d_lst = mini->d_lst->next;
-			// printf("%s\n", mini->d_lst->next->content);
-			check_for_command(mini);
-		}
-		if (mini->d_lst)
-			mini->d_lst = mini->d_lst->prev;
-	}
-	mini->d_lst = ptr;
-	if (mini->d_lst)
-	{
-		if (ft_strncmp(mini->d_lst->content, "|", 2) == 0 && mini->d_lst)
-		{
-			do_pipe(mini);
-			ft_bzero(mini->args, mini->def->size + 2);
-			mini->d_lst = mini->d_lst->next;
-			check_for_command(mini);
-		}
-	}
-}
+// 	int i;
+// 	int res;
+// 	i = 0;
+// 	res = 0;
+// 	mini->args = ft_calloc(mini->def->size + 2, sizeof(char**));
+// 	while (mini->d_lst && ft_strncmp(mini->d_lst->content, "|", 2) != 0)
+// 	{
+// 		while (mini->d_lst && ft_strncmp(mini->d_lst->content, ">", 2) == 0)
+// 		{
+// 			mini->d_lst = mini->d_lst->next->next;
+// 			res++;
+// 		}
+// 		if(!mini->d_lst)
+// 		{
+// 			mini->d_lst = mini->def->tail;
+// 			break ;
+// 		}
+// 		if (ft_strncmp(mini->d_lst->content, "|", 2) == 0)
+// 			break ;
+// 		mini->args[i] = ft_strdup(mini->d_lst->content);
+// 		// printf("%s\n", mini->args[i]);
+// 		mini->d_lst = mini->d_lst->next;
+// 		i++;
+// 	}
+// 	ptr = mini->d_lst;	// тут мы на пайпе
+// 	if (mini->d_lst && ft_strncmp(mini->d_lst->content, "|", 2) == 0)
+// 		mini->re_flag = 1;
+// 	if (!mini->d_lst && mini->re_flag != 1)
+// 		mini->d_lst = mini->def->tail;
+// 	while (mini->d_lst)
+// 	{
+// 		if (ft_strncmp(mini->d_lst->content, ">", 2) == 0)
+// 		{
+// 			mini->d_lst = mini->d_lst->next;
+// 			mini->fd_re = open(mini->d_lst->content, O_CREAT | O_WRONLY | O_APPEND, 0666);
+// 			do_redir(mini);
+// 			if (mini->re_flag == 0)
+// 				ft_bzero(mini->args, mini->def->size + 2);
+// 			break;
+// 			// mini->d_lst = mini->d_lst->next;
+// 			// printf("%s\n", mini->d_lst->next->content);
+// 			check_for_command(mini);
+// 		}
+// 		if (mini->d_lst)
+// 			mini->d_lst = mini->d_lst->prev;
+// 	}
+// 	mini->d_lst = ptr;
+// 	if (mini->d_lst)
+// 	{
+// 		if (ft_strncmp(mini->d_lst->content, "|", 2) == 0 && mini->d_lst)
+// 		{
+// 			// while (ft_strncmp(mini->d_lst->content, ">", 2) != 0)
+// 			// {
+
+// 			// }
+// 			do_pipe(mini);
+// 			ft_bzero(mini->args, mini->def->size + 2);
+// 			mini->d_lst = mini->d_lst->next;
+// 			// if (mini->re_flag == 0)
+// 			// 	return ;
+// 			// mini->re_flag = 0;
+// 			check_for_command(mini);
+// 		}
+// 	}
+// }
 
 int check_for_command(t_mini *mini)
 {

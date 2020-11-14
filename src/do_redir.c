@@ -38,9 +38,10 @@ void	do_redir(t_mini *mini)
         // close(mini->mas[1]);
         // dup2(mini->mas[0], 0);
         // close(mini->mas[0]);
-        waitpid(pid, &status, WUNTRACED);
 		close(mini->fd_re);
+        waitpid(pid, &status, WUNTRACED);
     }
 	mini->flag_pipe = 0;
+	// mini->re_flag = 0;
 	// printf("%s\n", mini->d_lst->content);
 }

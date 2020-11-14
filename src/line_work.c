@@ -90,7 +90,7 @@ void make_str(t_mini *mini, int i)
 	j = 0;
 	i = 0;
 	mini->line = ft_strtrim(mini->line, " ");
-	while (ft_isascii(mini->line[i]) && *mini->line != '\0'&& mini->line[i] != ' ')
+	while (ft_isascii(mini->line[i]) && *mini->line != '\0' && mini->line[i] != ' ')
 	{
 		if (mini->line[i] == '\'')
 		{
